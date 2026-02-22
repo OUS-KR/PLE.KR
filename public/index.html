@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PLE — ple.kr · The Suffix of Fold &amp; Fullness</title>
+<meta name="description" content="ple.kr — The domain of fold, fullness, and multiplication. Explore the ancient suffix born from Latin plic- that folds simple into multiple, single into manifold." />
+<meta property="og:title" content="PLE — ple.kr · The Suffix of Fold &amp; Fullness" />
+<meta property="og:description" content="ple.kr — Where one fold becomes many. From simple to multiple, ‑ple carries the mathematics of language." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style type="text/tailwindcss">
+  @theme {
+    --color-fold:    #4048d4;
+    --color-plex:    #8840e0;
+    --color-ample:   #d4a820;
+    --color-simple:  #e8f0ff;
+    --color-void:    #050408;
+
+    --font-display:  'Cinzel', serif;
+    --font-serif:    'Cormorant Garamond', serif;
+    --font-body:     'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #050408;
+    color: #e8f0ff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── canvas ── */
+  #ple-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── vignette ── */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+      transparent 36%,
+      rgba(5,4,8,.80) 100%);
+  }
+
+  /* ── fold overlay ── */
+  .fold-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 58% 40% at 15% 28%, rgba(64,72,212,.09) 0%, transparent 70%),
+      radial-gradient(ellipse 46% 34% at 85% 68%, rgba(136,64,224,.08) 0%, transparent 70%);
+  }
+
+  /* ── layout ── */
+  .page-content { position: relative; z-index: 2; }
+
+  /* ── header ── */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(5,4,8,.88);
+    backdrop-filter: blur(22px);
+    border-bottom: 1px solid rgba(64,72,212,.22);
+  }
+
+  /* ── hero bg text ── */
+  .hero-bg-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(12rem, 28vw, 26rem);
+    font-weight: 900;
+    letter-spacing: .12em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(64,72,212,.09);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ── fold ring ── */
+  .fold-ring {
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    border: 1px solid rgba(64,72,212,.18);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: foldPulse 8s ease-in-out infinite;
+  }
+  .fold-ring::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(136,64,224,.13);
+    animation: foldPulse 8s ease-in-out infinite reverse;
+  }
+  .fold-ring::after {
+    content: '';
+    position: absolute;
+    inset: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,168,32,.09);
+    animation: foldPulse 10s ease-in-out infinite 2s;
+  }
+  @keyframes foldPulse {
+    0%,100% { transform: translate(-50%,-50%) scale(1);    opacity:.9; }
+    50%      { transform: translate(-50%,-50%) scale(1.06); opacity:.35; }
+  }
+
+  /* ── suffix display ── */
+  .suffix-display {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(5rem, 16vw, 13rem);
+    font-weight: 900;
+    line-height: .88;
+    background: linear-gradient(135deg, #8840e0 0%, #4048d4 45%, #d4a820 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: .05em;
+  }
+
+  /* ── pill ── */
+  .word-pill {
+    display: inline-block;
+    padding: .26rem .9rem;
+    border-radius: 9999px;
+    font-size: .78rem;
+    font-weight: 500;
+    border: 1px solid rgba(64,72,212,.30);
+    background: rgba(64,72,212,.08);
+    color: #a0a8f8;
+    transition: all .24s;
+    cursor: default;
+  }
+  .word-pill:hover {
+    background: rgba(64,72,212,.22);
+    border-color: rgba(100,108,240,.6);
+    transform: translateY(-2px);
+    color: #d0d4ff;
+  }
+
+  /* ── stat card ── */
+  .stat-card {
+    background: rgba(255,255,255,.028);
+    border: 1px solid rgba(64,72,212,.16);
+    border-radius: 1.3rem;
+    padding: 1.7rem 2rem;
+    text-align: center;
+    transition: all .3s;
+  }
+  .stat-card:hover {
+    background: rgba(64,72,212,.07);
+    border-color: rgba(64,72,212,.38);
+    transform: translateY(-4px);
+  }
+
+  /* ── face card ── */
+  .face-card {
+    background: rgba(255,255,255,.022);
+    border-radius: 1.6rem;
+    padding: 2.2rem;
+    border: 1px solid rgba(255,255,255,.055);
+    transition: all .34s;
+  }
+  .face-card:hover {
+    background: rgba(255,255,255,.048);
+    transform: translateY(-5px);
+  }
+
+  /* ── feat card ── */
+  .feat-card {
+    background: rgba(255,255,255,.022);
+    border: 1px solid rgba(255,255,255,.055);
+    border-radius: 1.2rem;
+    padding: 1.8rem;
+    transition: all .3s;
+  }
+  .feat-card:hover {
+    background: rgba(255,255,255,.048);
+    border-color: rgba(64,72,212,.32);
+    transform: translateY(-3px);
+  }
+
+  /* ── fold diagram ── */
+  .fold-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(64,72,212,.18);
+    border-radius: 1.4rem;
+    padding: 2.5rem 2rem;
+    overflow-x: auto;
+  }
+  .fold-node {
+    text-align: center;
+    padding: .8rem 1.3rem;
+    background: rgba(64,72,212,.12);
+    border: 1px solid rgba(64,72,212,.28);
+    border-radius: .8rem;
+    min-width: 100px;
+  }
+  .fold-arrow {
+    font-size: 1.2rem;
+    color: rgba(64,72,212,.5);
+    padding: 0 .5rem;
+    flex-shrink: 0;
+  }
+
+  /* ── timeline ── */
+  .timeline-step {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline-step::before {
+    content: '';
+    position: absolute;
+    left: 0; top: .55rem;
+    width: .65rem; height: .65rem;
+    border-radius: 50%;
+    background: #4048d4;
+    box-shadow: 0 0 10px rgba(64,72,212,.7);
+  }
+  .timeline-step::after {
+    content: '';
+    position: absolute;
+    left: .3rem; top: 1.4rem;
+    width: 1px;
+    height: calc(100% + .5rem);
+    background: rgba(64,72,212,.18);
+  }
+  .timeline-step:last-child::after { display: none; }
+
+  /* ── gallery ── */
+  .gallery-item {
+    background: rgba(255,255,255,.022);
+    border: 1px solid rgba(255,255,255,.055);
+    border-radius: 1rem;
+    padding: 1.15rem 1.3rem;
+    transition: all .27s;
+    cursor: default;
+  }
+  .gallery-item:hover {
+    background: rgba(64,72,212,.10);
+    border-color: rgba(64,72,212,.32);
+    transform: translateY(-3px);
+  }
+
+  /* ── codex ── */
+  .codex-box {
+    background: rgba(255,255,255,.022);
+    border: 1px solid rgba(64,72,212,.22);
+    border-radius: 1.6rem;
+    padding: 2.4rem;
+  }
+  .codex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: .68rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    gap: 1rem;
+  }
+  .codex-row:last-child { border-bottom: none; }
+
+  /* ── series ── */
+  .series-card {
+    background: rgba(255,255,255,.022);
+    border: 1px solid rgba(255,255,255,.055);
+    border-radius: 1rem;
+    padding: 1.1rem 1.4rem;
+    text-align: center;
+    transition: all .26s;
+    text-decoration: none;
+    display: block;
+  }
+  .series-card:hover {
+    background: rgba(255,255,255,.05);
+    border-color: rgba(64,72,212,.32);
+    transform: translateY(-2px);
+  }
+  .series-card.active {
+    background: rgba(64,72,212,.15);
+    border-color: rgba(64,72,212,.55);
+  }
+
+  /* ── fade-up ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── buttons ── */
+  .btn-primary {
+    display: inline-block;
+    padding: .88rem 2.3rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #4048d4, #8840e0);
+    color: #fff;
+    font-weight: 600;
+    font-size: .95rem;
+    letter-spacing: .06em;
+    text-decoration: none;
+    transition: all .26s;
+    box-shadow: 0 4px 26px rgba(64,72,212,.38);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 36px rgba(64,72,212,.55);
+  }
+  .btn-outline {
+    display: inline-block;
+    padding: .88rem 2.3rem;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(64,72,212,.5);
+    color: #a0a8f8;
+    font-weight: 600;
+    font-size: .95rem;
+    letter-spacing: .06em;
+    text-decoration: none;
+    transition: all .26s;
+  }
+  .btn-outline:hover {
+    background: rgba(64,72,212,.12);
+    border-color: #4048d4;
+    transform: translateY(-3px);
+    color: #d0d4ff;
+  }
+
+  section { position: relative; }
+</style>
+</head>
+<body>
+
+<canvas id="ple-canvas"></canvas>
+<div class="vignette"></div>
+<div class="fold-overlay"></div>
+
+<div class="page-content">
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header class="site-header">
+  <div style="max-width:1280px;margin:0 auto;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:.9rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4048d4,#8840e0);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:.88rem;color:#fff;letter-spacing:.02em;">P</div>
+      <span style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:600;letter-spacing:.09em;color:#e8f0ff;">ple.kr</span>
+      <span style="padding:.15rem .72rem;border-radius:9999px;background:rgba(64,72,212,.14);border:1px solid rgba(64,72,212,.38);font-size:.7rem;font-weight:600;letter-spacing:.1em;color:#a0a8f8;text-transform:uppercase;">Suffix Domain</span>
+    </div>
+    <nav style="display:flex;gap:2rem;align-items:center;">
+      <a href="#identity" style="font-size:.85rem;color:rgba(232,240,255,.55);text-decoration:none;letter-spacing:.04em;transition:color .2s;" onmouseover="this.style.color='#a0a8f8'" onmouseout="this.style.color='rgba(232,240,255,.55)'">Identity</a>
+      <a href="#words"    style="font-size:.85rem;color:rgba(232,240,255,.55);text-decoration:none;letter-spacing:.04em;transition:color .2s;" onmouseover="this.style.color='#a0a8f8'" onmouseout="this.style.color='rgba(232,240,255,.55)'">Words</a>
+      <a href="#origins"  style="font-size:.85rem;color:rgba(232,240,255,.55);text-decoration:none;letter-spacing:.04em;transition:color .2s;" onmouseover="this.style.color='#a0a8f8'" onmouseout="this.style.color='rgba(232,240,255,.55)'">Origins</a>
+      <a href="#contact"  class="btn-primary" style="padding:.46rem 1.35rem;font-size:.82rem;">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden;">
+  <div class="hero-bg-text">PLE</div>
+  <div class="fold-ring"></div>
+
+  <div style="max-width:880px;text-align:center;position:relative;">
+
+    <!-- badge -->
+    <div style="display:inline-flex;align-items:center;gap:.6rem;padding:.4rem 1.2rem;border-radius:9999px;background:rgba(64,72,212,.11);border:1px solid rgba(64,72,212,.32);margin-bottom:2rem;">
+      <span style="width:6px;height:6px;border-radius:50%;background:#4048d4;box-shadow:0 0 9px rgba(64,72,212,.8);display:inline-block;"></span>
+      <span style="font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:#a0a8f8;font-weight:600;">Suffix Domain</span>
+    </div>
+
+    <!-- suffix -->
+    <div class="suffix-display" style="margin-bottom:.7rem;">‑ple</div>
+
+    <!-- origin -->
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-style:italic;color:rgba(232,240,255,.5);letter-spacing:.07em;margin-bottom:2rem;">
+      PIE <em>*pel-</em> (fold) · Latin <em>plic-</em> (to fold) · <em>simplex → simplus → ‑ple</em>
+    </p>
+
+    <!-- meaning -->
+    <p style="font-size:1.22rem;line-height:1.78;color:rgba(232,240,255,.82);max-width:660px;margin:0 auto 1.8rem;font-family:'Cormorant Garamond',serif;font-size:1.28rem;">
+      The suffix that <strong style="color:#a0a8f8;">counts the folds</strong> — from the pure simplicity of 
+      one fold (<em>simple</em>) to the limitless abundance of many 
+      (<em>multiple</em>). Born from Latin's word for <em>to fold</em>, 
+      ‑ple carries within it the geometry of multiplication itself.
+    </p>
+
+    <!-- quote -->
+    <blockquote style="font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-style:italic;color:#d4a820;margin-bottom:2.2rem;padding:.8rem 1.6rem;border-left:2px solid rgba(212,168,32,.4);">
+      "In ‑ple, a single Latin root unfolds into a thousand English possibilities — simple and multiple, ample and triple, all from one fold."
+    </blockquote>
+
+    <!-- pills -->
+    <div style="display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-bottom:2.8rem;">
+      <span class="word-pill">simple</span>
+      <span class="word-pill">multiple</span>
+      <span class="word-pill">triple</span>
+      <span class="word-pill">ample</span>
+      <span class="word-pill">example</span>
+      <span class="word-pill">people</span>
+      <span class="word-pill">purple</span>
+      <span class="word-pill">temple</span>
+      <span class="word-pill">staple</span>
+      <span class="word-pill">maple</span>
+      <span class="word-pill">couple</span>
+      <span class="word-pill">apple</span>
+      <span class="word-pill">ripple</span>
+      <span class="word-pill">dimple</span>
+      <span class="word-pill">ample</span>
+    </div>
+
+    <!-- CTA -->
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#identity" class="btn-primary">Explore ‑ple</a>
+      <a href="#words"    class="btn-outline">Word Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS
+════════════════════════════════════════════ -->
+<section id="identity" style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;" class="fade-up">
+      <div class="stat-card">
+        <div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#4048d4,#8840e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">100+</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,240,255,.45);margin-top:.4rem;">‑ple words in English</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#8840e0,#d4a820);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">plic-</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,240,255,.45);margin-top:.4rem;">Latin root "to fold"</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#d4a820,#4048d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,240,255,.45);margin-top:.4rem;">grammatical roles</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#4048d4,#8840e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">PIE</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,240,255,.45);margin-top:.4rem;">Proto-Indo-European root</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     THE FOLD DIAGRAM
+════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">The Fold Principle</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">From One Fold to Many</h2>
+      <p style="font-size:1rem;color:rgba(232,240,255,.55);margin-top:.8rem;max-width:560px;margin-left:auto;margin-right:auto;">Latin <em>plic-</em> (to fold) combined with number roots to build a complete mathematical vocabulary in English.</p>
+    </div>
+    <div class="fold-diagram fade-up" style="flex-wrap:wrap;gap:1rem;">
+      <div class="fold-node">
+        <div style="font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;color:#a0a8f8;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;">sem- + plic</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:#d4a820;">simplex</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);margin-top:.2rem;">one-fold</div>
+      </div>
+      <div class="fold-arrow">→</div>
+      <div class="fold-node" style="background:rgba(64,72,212,.18);">
+        <div style="font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;color:#a0a8f8;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;">simplus (med. L)</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:#d4a820;">simplus</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);margin-top:.2rem;">medieval variant</div>
+      </div>
+      <div class="fold-arrow">→</div>
+      <div class="fold-node" style="background:rgba(136,64,224,.18);border-color:rgba(136,64,224,.4);">
+        <div style="font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;color:#c080ff;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;">Old French</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:#d4a820;">simple</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);margin-top:.2rem;">→ English <strong style="color:#d0d4ff;">simple</strong></div>
+      </div>
+      <div class="fold-arrow">→</div>
+      <div class="fold-node" style="background:rgba(212,168,32,.12);border-color:rgba(212,168,32,.35);">
+        <div style="font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;color:#d4a820;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;">multi + plic</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:#d4a820;">multiple</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);margin-top:.2rem;">many-fold</div>
+      </div>
+    </div>
+    <!-- secondary row -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:1.2rem;" class="fade-up">
+      <div style="text-align:center;padding:1rem;background:rgba(64,72,212,.07);border:1px solid rgba(64,72,212,.18);border-radius:.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#a0a8f8;margin-bottom:.2rem;">du + plic → duple</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);">two-fold</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:rgba(64,72,212,.07);border:1px solid rgba(64,72,212,.18);border-radius:.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#a0a8f8;margin-bottom:.2rem;">tri + plic → triple</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);">three-fold</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:rgba(64,72,212,.07);border:1px solid rgba(64,72,212,.18);border-radius:.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#a0a8f8;margin-bottom:.2rem;">quadru + plic → quadruple</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);">four-fold</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:rgba(64,72,212,.07);border:1px solid rgba(64,72,212,.18);border-radius:.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#a0a8f8;margin-bottom:.2rem;">quin + tup → quintuple</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);">five-fold</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:rgba(212,168,32,.07);border:1px solid rgba(212,168,32,.18);border-radius:.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#d4a820;margin-bottom:.2rem;">am + ple → ample</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);">full, abundant</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:rgba(136,64,224,.07);border:1px solid rgba(136,64,224,.18);border-radius:.8rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#c080ff;margin-bottom:.2rem;">ex + ample → example</div>
+        <div style="font-size:.72rem;color:rgba(232,240,255,.4);">taken out, shown</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     THREE FACES  (Numeral / Adj / Noun)
+════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Grammatical Identity</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">Three Faces of ‑ple</h2>
+      <p style="font-size:1rem;color:rgba(232,240,255,.55);margin-top:.8rem;max-width:560px;margin-left:auto;margin-right:auto;">Behind a deceptively simple three-letter ending lies a suffix that operates across three grammatical domains — each revealing a different dimension of the fold.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.8rem;">
+
+      <!-- Numeral Adj -->
+      <div class="face-card fade-up" style="border-top:3px solid #4048d4;">
+        <div style="font-size:2.8rem;margin-bottom:1rem;">🔢</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#4048d4;margin-bottom:.5rem;font-weight:600;">Numeral Adjective</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.45rem;font-weight:700;color:#e8f0ff;margin-bottom:.8rem;">Multiplication &amp; Fold</h3>
+        <p style="font-size:.9rem;color:rgba(232,240,255,.65);line-height:1.72;margin-bottom:1.1rem;">The core function of ‑ple: combining with Latin number roots to express how many folds. From <em>duple</em> (twofold) to <em>multiple</em> (manyfold), this is ‑ple as the language of mathematics.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+          <span class="word-pill">simple</span>
+          <span class="word-pill">duple</span>
+          <span class="word-pill">triple</span>
+          <span class="word-pill">quadruple</span>
+          <span class="word-pill">multiple</span>
+        </div>
+      </div>
+
+      <!-- Adjective -->
+      <div class="face-card fade-up" style="border-top:3px solid #8840e0;">
+        <div style="font-size:2.8rem;margin-bottom:1rem;">✨</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#8840e0;margin-bottom:.5rem;font-weight:600;">Quality Adjective</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.45rem;font-weight:700;color:#e8f0ff;margin-bottom:.8rem;">Abundance &amp; Quality</h3>
+        <p style="font-size:.9rem;color:rgba(232,240,255,.65);line-height:1.72;margin-bottom:1.1rem;">Beyond pure number, ‑ple describes intrinsic qualities — the fullness of <em>ample</em>, the self-evidence of <em>simple</em>. These adjectives carry a sense of completeness and sufficiency rooted in the Latin notion of "full fold."</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+          <span class="word-pill" style="border-color:rgba(136,64,224,.3);background:rgba(136,64,224,.08);color:#c080ff;">ample</span>
+          <span class="word-pill" style="border-color:rgba(136,64,224,.3);background:rgba(136,64,224,.08);color:#c080ff;">supple</span>
+          <span class="word-pill" style="border-color:rgba(136,64,224,.3);background:rgba(136,64,224,.08);color:#c080ff;">purple</span>
+        </div>
+      </div>
+
+      <!-- Noun -->
+      <div class="face-card fade-up" style="border-top:3px solid #d4a820;">
+        <div style="font-size:2.8rem;margin-bottom:1rem;">🏛️</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#d4a820;margin-bottom:.5rem;font-weight:600;">Noun &amp; Place</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.45rem;font-weight:700;color:#e8f0ff;margin-bottom:.8rem;">Things &amp; Places</h3>
+        <p style="font-size:.9rem;color:rgba(232,240,255,.65);line-height:1.72;margin-bottom:1.1rem;">‑ple also anchors concrete nouns — people, places, and things. Some of the most fundamental words in English wear the ‑ple ending: <em>people</em>, <em>temple</em>, <em>example</em>, <em>apple</em>, <em>staple</em>. Here the suffix is less visible but no less present.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+          <span class="word-pill" style="border-color:rgba(212,168,32,.3);background:rgba(212,168,32,.07);color:#d4a820;">people</span>
+          <span class="word-pill" style="border-color:rgba(212,168,32,.3);background:rgba(212,168,32,.07);color:#d4a820;">temple</span>
+          <span class="word-pill" style="border-color:rgba(212,168,32,.3);background:rgba(212,168,32,.07);color:#d4a820;">example</span>
+          <span class="word-pill" style="border-color:rgba(212,168,32,.3);background:rgba(212,168,32,.07);color:#d4a820;">apple</span>
+          <span class="word-pill" style="border-color:rgba(212,168,32,.3);background:rgba(212,168,32,.07);color:#d4a820;">staple</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     P · L · E  LETTERS GRID
+════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Sonic Anatomy</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">The Letters of ‑ple</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;" class="fade-up">
+      <div style="text-align:center;padding:2.6rem 1.5rem;background:rgba(64,72,212,.06);border:1px solid rgba(64,72,212,.18);border-radius:1.6rem;">
+        <div style="font-family:'Cinzel',serif;font-size:4.5rem;font-weight:900;color:#4048d4;line-height:1;margin-bottom:1rem;">P</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,240,255,.38);margin-bottom:.6rem;">Plic-</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.62);line-height:1.65;">The P carries the entire history of Latin <em>plic-</em> (to fold) within it. Every ‑ple word begins with this single consonant that encodes the concept of a fold, a layer, a multiplication of form.</p>
+      </div>
+      <div style="text-align:center;padding:2.6rem 1.5rem;background:rgba(136,64,224,.06);border:1px solid rgba(136,64,224,.18);border-radius:1.6rem;">
+        <div style="font-family:'Cinzel',serif;font-size:4.5rem;font-weight:900;color:#8840e0;line-height:1;margin-bottom:1rem;">L</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,240,255,.38);margin-bottom:.6rem;">Lateral</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.62);line-height:1.65;">The liquid lateral L is the smoothing element — the tongue touches the ridge of the mouth and slides, creating the characteristic flowing, unhurried sound that gives ‑ple words their effortless clarity and ease.</p>
+      </div>
+      <div style="text-align:center;padding:2.6rem 1.5rem;background:rgba(212,168,32,.06);border:1px solid rgba(212,168,32,.18);border-radius:1.6rem;">
+        <div style="font-family:'Cinzel',serif;font-size:4.5rem;font-weight:900;color:#d4a820;line-height:1;margin-bottom:1rem;">E</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,240,255,.38);margin-bottom:.6rem;">Ease</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.62);line-height:1.65;">The final silent E is a spelling convention inherited from Old French and Latin — it signals the quality of the preceding consonant cluster without being pronounced. It is the quiet completion of the suffix's form.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURE CARDS
+════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Linguistic Features</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">What Makes ‑ple Unique</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem;" class="fade-up">
+      <div class="feat-card">
+        <div style="font-size:1.9rem;margin-bottom:1rem;">🧮</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:#e8f0ff;margin-bottom:.65rem;">Numerical Architecture</h3>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.68;">‑ple is one of the few suffixes that encodes pure mathematics. The multiplier series — <em>double, triple, quadruple, quintuple, sextuple, septuple, octuple</em> — forms an elegant Latin numerical staircase, each step adding one more fold to the structure.</p>
+      </div>
+      <div class="feat-card">
+        <div style="font-size:1.9rem;margin-bottom:1rem;">🌍</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:#e8f0ff;margin-bottom:.65rem;">Cross-Register Reach</h3>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.68;">Unlike most Latinate suffixes that remain formal, ‑ple penetrates every register. <em>Apple</em> and <em>people</em> are among the most common words in English; <em>multiple</em> appears in scientific papers; <em>temple</em> anchors religious discourse. No level of language is without ‑ple.</p>
+      </div>
+      <div class="feat-card">
+        <div style="font-size:1.9rem;margin-bottom:1rem;">🔗</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:#e8f0ff;margin-bottom:.65rem;">The Invisible Suffix</h3>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.68;">Many ‑ple words are so thoroughly absorbed into English that speakers no longer recognise the suffix at all. <em>Purple</em> (from Greek <em>porphyra</em>), <em>apple</em> (OE <em>æppel</em>), <em>people</em> (OF <em>peuple</em>) — ‑ple is a hidden architecture, present everywhere, noticed nowhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ETYMOLOGY TIMELINE
+════════════════════════════════════════════ -->
+<section id="origins" style="padding:5rem 2rem;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Etymology</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">The Journey of ‑ple</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2rem;" class="fade-up">
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#4048d4;margin-bottom:.3rem;">Proto-Indo-European · pre-2000 BCE</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#a0a8f8;margin-bottom:.3rem;font-style:italic;">*pel- — "to fold, to fill"</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.65;">The PIE root <em>*pel-</em> carried a cluster of meanings centred on folding and filling — the physical act of bending something back on itself to create layers. This same root gave rise to words across all Indo-European languages, from Sanskrit to Greek to Latin.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#4048d4;margin-bottom:.3rem;">Classical Latin · 200 BCE – 400 CE</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#a0a8f8;margin-bottom:.3rem;font-style:italic;">plic- / plicō — "to fold"</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.65;">Latin formalised the root as <em>plicāre</em> (to fold) and <em>plic-</em> (the combining form). This combined with number roots to create a complete system of multiplier adjectives: <em>simplex</em> (one-fold), <em>duplex</em> (two-fold), <em>triplex</em> (three-fold), <em>multiplex</em> (many-fold).</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#4048d4;margin-bottom:.3rem;">Medieval Latin · 400–1100 CE</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#a0a8f8;margin-bottom:.3rem;font-style:italic;">-plus variant → simplus, duplus, triplus</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.65;">Medieval Latin scholars developed a second-declension variant alongside <em>-plex</em>: <em>simplus, duplus, triplus</em>. These softer forms, ending in ‑plus, were the direct ancestors of English ‑ple words via Old French. The shift from <em>-plex</em> (complex) to <em>-ple</em> (simple) marks the transition from learned to vernacular Latin.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#4048d4;margin-bottom:.3rem;">Old French · 800–1300 CE</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#a0a8f8;margin-bottom:.3rem;font-style:italic;">simple, triple, exemple, peuple</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.65;">Old French reshaped the Latin forms, reducing the endings to ‑ple and giving them the phonetic profile they carry today. The Norman Conquest of 1066 introduced this French vocabulary into English in great waves — <em>simple, triple, example, people, temple, purple</em> all arrived in this period.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#4048d4;margin-bottom:.3rem;">Middle &amp; Modern English · 1100 CE → present</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#a0a8f8;margin-bottom:.3rem;font-style:italic;">‑ple · fully assimilated</div>
+        <p style="font-size:.88rem;color:rgba(232,240,255,.6);line-height:1.65;">English absorbed the ‑ple words completely, assimilating them into the core vocabulary. The scientific register continued borrowing directly from Latin and Greek (<em>multiple, quadruple, sextuple</em>), while everyday speech retained the Old French forms. Today, ‑ple sits invisibly at the heart of English — carrying two thousand years of folded history in three quiet letters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WORD GALLERY
+════════════════════════════════════════════ -->
+<section id="words" style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Word Gallery</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">‑ple in Action</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:1rem;" class="fade-up">
+
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">simple</div>
+        <div style="font-size:.72rem;color:#4048d4;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">one-fold; L <em>simplex → simplus</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">multiple</div>
+        <div style="font-size:.72rem;color:#4048d4;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective / noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">many-fold; L <em>multus + plicāre</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">triple</div>
+        <div style="font-size:.72rem;color:#4048d4;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">three-fold; L <em>triplex → triplus</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">ample</div>
+        <div style="font-size:.72rem;color:#8840e0;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">full, spacious; L <em>amplus</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">example</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">sample; L <em>exemplum</em> (ex + emere)</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">people</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">persons; OF <em>peuple</em>, L <em>populus</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">temple</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">sacred place; OF <em>temple</em>, L <em>templum</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">purple</div>
+        <div style="font-size:.72rem;color:#8840e0;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective / noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">violet-red; Gk <em>porphyra</em> via L</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">quadruple</div>
+        <div style="font-size:.72rem;color:#4048d4;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">four-fold; L <em>quadruplus</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">maple</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">tree; OE <em>mapultreow</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">staple</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun / adjective</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">basic item; OE/MDu <em>stapel</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">apple</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">fruit; OE <em>æppel</em>, Germanic</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">couple</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">two together; OF <em>couple</em>, L <em>copula</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">ripple</div>
+        <div style="font-size:.72rem;color:#8840e0;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">small wave; origin obscure, 17c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">dimple</div>
+        <div style="font-size:.72rem;color:#8840e0;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">small hollow; ME, Gmc root</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">sample</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">small portion; AF <em>essample</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">supple</div>
+        <div style="font-size:.72rem;color:#8840e0;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">flexible; OF <em>souple</em>, L <em>supplex</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">pimple</div>
+        <div style="font-size:.72rem;color:#8840e0;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">small swelling; OE <em>pipilian</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">quintuple</div>
+        <div style="font-size:.72rem;color:#4048d4;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">adjective / verb</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">five-fold; L <em>quintuplus</em></div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#a0a8f8;">principle</div>
+        <div style="font-size:.72rem;color:#d4a820;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;">noun</div>
+        <div style="font-size:.83rem;color:rgba(232,240,255,.52);">rule; L <em>principium</em> (primus + capere)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CODEX BOX
+════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Lexical Profile</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">Codex ‑ple</h2>
+    </div>
+    <div class="codex-box fade-up">
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:2rem;padding-bottom:1.3rem;border-bottom:1px solid rgba(64,72,212,.2);">
+        <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#4048d4,#8840e0);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:.95rem;color:#fff;letter-spacing:.02em;">ple</div>
+        <div>
+          <div style="font-family:'Cinzel',serif;font-size:1.12rem;font-weight:700;color:#e8f0ff;letter-spacing:.06em;">SUFFIX PROFILE</div>
+          <div style="font-size:.75rem;color:rgba(232,240,255,.38);letter-spacing:.1em;">ple.kr · Lexical Identity</div>
+        </div>
+      </div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Suffix</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:#a0a8f8;">‑ple</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Root</span><span style="font-size:.9rem;color:#e8f0ff;text-align:right;max-width:62%;">PIE <em>*pel-</em> → L <em>plic-</em> (to fold)</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Path</span><span style="font-size:.9rem;color:#e8f0ff;text-align:right;max-width:62%;">Latin <em>-plex/-plus</em> → Old French → English</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Function</span><span style="font-size:.9rem;color:#e8f0ff;text-align:right;max-width:62%;">Numeral adj., quality adj., noun</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Core Meaning</span><span style="font-size:.9rem;color:#e8f0ff;">"fold" → multiplicity, fullness</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Register</span><span style="font-size:.9rem;color:#e8f0ff;">Universal — everyday to scientific</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Productivity</span><span style="font-size:.9rem;color:#e8f0ff;">Moderate (numeral series open-ended)</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(232,240,255,.42);letter-spacing:.08em;text-transform:uppercase;">Domain</span><span style="font-size:.9rem;color:#a0a8f8;font-weight:600;">ple.kr</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SUFFIX SERIES
+════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:.8rem;">Suffix Family</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:#e8f0ff;">The Suffix Series</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;" class="fade-up">
+      <a href="https://ous.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ous</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ous.kr</div></a>
+      <a href="https://ize.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ize</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ize.kr</div></a>
+      <a href="https://ive.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ive</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ive.kr</div></a>
+      <a href="https://ity.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ity</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ity.kr</div></a>
+      <a href="https://ify.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ify</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ify.kr</div></a>
+      <a href="https://ial.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ial</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ial.kr</div></a>
+      <a href="https://ful.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ful</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ful.kr</div></a>
+      <a href="https://ary.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ary</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ary.kr</div></a>
+      <a href="https://ble.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ble</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ble.kr</div></a>
+      <a href="https://rry.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑rry</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">rry.kr</div></a>
+      <a href="https://ppy.kr" class="series-card"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#e8f0ff;margin-bottom:.3rem;">‑ppy</div><div style="font-size:.72rem;color:rgba(232,240,255,.38);">ppy.kr</div></a>
+      <a href="https://ple.kr" class="series-card active"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:#a0a8f8;margin-bottom:.3rem;">‑ple</div><div style="font-size:.72rem;color:#4048d4;font-weight:600;">ple.kr</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ORIGIN NARRATIVE
+════════════════════════════════════════════ -->
+<section style="padding:6rem 2rem;">
+  <div style="max-width:800px;margin:0 auto;text-align:center;" class="fade-up">
+    <div style="font-size:4.2rem;margin-bottom:1.5rem;">🌀</div>
+    <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#4048d4;margin-bottom:1rem;">Origin Story</p>
+    <h2 style="font-family:'Cinzel',serif;font-size:2.3rem;font-weight:700;color:#e8f0ff;margin-bottom:1.8rem;">The Mathematics of Language</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.14rem;line-height:1.86;color:rgba(232,240,255,.78);margin-bottom:1.5rem;">
+      Long before algebra or notation, ancient speakers discovered that the simplest mathematical concept — <strong style="color:#a0a8f8;">folding</strong> — could describe multiplication. To double something is to fold it in two. To triple is to fold in three. This insight, encoded in the Latin root <em>plic-</em>, gave rise to the entire ‑ple family: a suffix that turns counting into poetry.
+    </p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.14rem;line-height:1.86;color:rgba(232,240,255,.78);margin-bottom:2.5rem;">
+      Today, ‑ple is everywhere and invisible: in the <strong style="color:#d4a820;"><em>simple</em></strong> clarity of a good idea, the <strong style="color:#d4a820;"><em>ample</em></strong> space of a great room, the <strong style="color:#d4a820;"><em>multiple</em></strong> possibilities of every choice. Three letters. Two thousand years. One ancient fold.
+    </p>
+    <a href="#contact" class="btn-primary">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════ -->
+<section id="contact" style="padding:6rem 2rem;">
+  <div style="max-width:680px;margin:0 auto;text-align:center;" class="fade-up">
+    <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,#4048d4,#8840e0);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.7rem;">✉️</div>
+    <h2 style="font-family:'Cinzel',serif;font-size:2.3rem;font-weight:700;color:#e8f0ff;margin-bottom:1rem;">Connect with ple.kr</h2>
+    <p style="font-size:1rem;color:rgba(232,240,255,.6);line-height:1.72;margin-bottom:2.3rem;">
+      Interested in the ‑ple domain, the suffix series project, or the lexical identity of your own domain? Reach out — because every great connection is, at its heart, a fold.
+    </p>
+    <a href="mailto:hello@ple.kr" class="btn-primary" style="font-size:1rem;">hello@ple.kr</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="border-top:1px solid rgba(64,72,212,.12);padding:2.5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+    <div style="display:flex;align-items:center;gap:.7rem;">
+      <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4048d4,#8840e0);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:.72rem;color:#fff;">P</div>
+      <span style="font-family:'Cinzel',serif;font-size:.92rem;letter-spacing:.1em;color:rgba(232,240,255,.42);">ple.kr</span>
+    </div>
+    <div style="font-size:.78rem;color:rgba(232,240,255,.28);letter-spacing:.06em;">The Suffix of Fold &amp; Fullness</div>
+    <div style="font-size:.78rem;color:rgba(232,240,255,.28);">© 2026 ple.kr</div>
+  </div>
+</footer>
+
+</div><!-- /page-content -->
+
+<!-- ═══════════════════════════════════════════
+     PARTICLE SYSTEM + SCROLL OBSERVER
+════════════════════════════════════════════ -->
+<script>
+(function () {
+  const C = {
+    fold:   '#4048d4',
+    plex:   '#8840e0',
+    ample:  '#d4a820',
+    simple: '#e8f0ff',
+    void:   '#050408'
+  };
+
+  const canvas = document.getElementById('ple-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initAll(); });
+
+  /* ══════════════════════════════
+     Layer 1 · FoldMote  (drifting dot particles)
+  ══════════════════════════════ */
+  class FoldMote {
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.r  = Math.random() * 2.6 + .8;
+      this.vx = (Math.random() - .5) * .38;
+      this.vy = (Math.random() - .5) * .38;
+      const p = [C.fold, C.plex, C.ample, C.simple];
+      this.col   = p[Math.floor(Math.random() * p.length)];
+      this.alpha = Math.random() * .42 + .08;
+      this.pulse = Math.random() * Math.PI * 2;
+      this.pspd  = Math.random() * .022 + .008;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.pulse += this.pspd;
+      if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+      if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+    }
+    draw() {
+      const a = this.alpha * (.6 + .4 * Math.sin(this.pulse));
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.col;
+      ctx.globalAlpha = a;
+      ctx.shadowColor = this.col;
+      ctx.shadowBlur  = 5;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  /* ══════════════════════════════
+     Layer 2 · FoldWord  (floating -ple words)
+  ══════════════════════════════ */
+  const PLE_WORDS = ['simple','multiple','triple','ample','example','people',
+                     'temple','purple','maple','staple','couple','ripple',
+                     'dimple','sample','supple','duple','quadruple','‑ple',
+                     'quintuple','principle','apple'];
+
+  class FoldWord {
+    reset() {
+      this.x     = Math.random() * W;
+      this.y     = H + 28;
+      this.vy    = -(Math.random() * .55 + .16);
+      this.vx    = (Math.random() - .5) * .2;
+      this.word  = PLE_WORDS[Math.floor(Math.random() * PLE_WORDS.length)];
+      this.size  = Math.random() * 9 + 8;
+      this.alpha = 0;
+      this.maxAlpha = Math.random() * .2 + .06;
+      const cols = [C.fold, C.plex, C.ample];
+      this.col = cols[Math.floor(Math.random() * cols.length)];
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.alpha < this.maxAlpha) this.alpha += .002;
+      if (this.y < H * .3)  this.alpha -= .003;
+      if (this.alpha < 0 || this.y < -40) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.font = `italic ${this.size}px 'Cormorant Garamond', serif`;
+      ctx.fillStyle = this.col;
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.fillText(this.word, this.x, this.y);
+      ctx.restore();
+    }
+  }
+
+  /* ══════════════════════════════
+     Layer 3 · FoldLine  (geometry fold lines)
+  ══════════════════════════════ */
+  class FoldLine {
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.len = Math.random() * 80 + 25;
+      this.angle = Math.random() * Math.PI * 2;
+      this.aSp   = (Math.random() - .5) * .010;
+      this.vx    = (Math.random() - .5) * .35;
+      this.vy    = (Math.random() - .5) * .35;
+      this.alpha = Math.random() * .10 + .03;
+      this.col   = Math.random() < .55 ? C.fold : C.plex;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.angle += this.aSp;
+      if (this.x < -120 || this.x > W + 120 ||
+          this.y < -120 || this.y > H + 120) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(
+        this.x + Math.cos(this.angle) * this.len,
+        this.y + Math.sin(this.angle) * this.len
+      );
+      ctx.strokeStyle = this.col;
+      ctx.globalAlpha = this.alpha;
+      ctx.lineWidth   = .8;
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ══════════════════════════════
+     Layer 4 · PlexRing  (expanding fold rings)
+  ══════════════════════════════ */
+  class PlexRing {
+    reset() {
+      this.x    = Math.random() * W;
+      this.y    = Math.random() * H;
+      this.r    = Math.random() * 28 + 8;
+      this.maxR = Math.random() * 160 + 70;
+      this.spd  = Math.random() * .75 + .32;
+      this.alpha = Math.random() * .18 + .05;
+      const p = [C.fold, C.plex, C.ample];
+      this.col = p[Math.floor(Math.random() * p.length)];
+    }
+    update() {
+      this.r += this.spd;
+      this.alpha -= .0018;
+      if (this.alpha <= 0 || this.r > this.maxR) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.strokeStyle = this.col;
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ── pools ── */
+  let motes = [], words = [], lines = [], rings = [];
+
+  function initAll() {
+    motes = Array.from({ length: 62 }, () => { const m = new FoldMote(); m.reset(); m.y = Math.random() * H; return m; });
+    words = Array.from({ length: 28 }, () => { const w = new FoldWord(); w.reset(); w.y = Math.random() * H; return w; });
+    lines = Array.from({ length: 20 }, () => { const l = new FoldLine(); l.reset(); return l; });
+    rings = Array.from({ length: 13 }, () => { const r = new PlexRing(); r.reset(); r.r = Math.random() * r.maxR; return r; });
+  }
+  initAll();
+
+  /* ── loop ── */
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    rings.forEach(r => { r.update(); r.draw(); });
+    lines.forEach(l => { l.update(); l.draw(); });
+    motes.forEach(m => { m.update(); m.draw(); });
+    words.forEach(w => { w.update(); w.draw(); });
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  /* ── IntersectionObserver ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+})();
+</script>
+
+</body>
+</html>
