@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>‑ple | ple.kr – 영어 접미사 ‑ple의 모든 것</title>
+<meta name="description" content="‑ple: 배수·반복·복수를 나타내는 영어 접미사. simple, multiple, triple, people… ple.kr에서 어원과 파생어를 탐구하세요."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #020309;
+    --coral: #f97066;
+    --orange: #fb923c;
+    --amber: #fbbf24;
+    --rose: #fb7185;
+    --red: #ef4444;
+    --cream: #fef3c7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: #e2e8f0;
+    font-family: 'Inter', 'Noto Serif KR', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Background radial layers */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 52% at 14% 22%, rgba(249,112,102,.09) 0%, transparent 62%),
+      radial-gradient(ellipse 58% 46% at 86% 78%, rgba(251,146,60,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 58% at 50% 50%, rgba(251,191,36,.04) 0%, transparent 68%);
+    pointer-events: none;
+  }
+
+  /* Top stripe */
+  .top-stripe {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 9999;
+    background: linear-gradient(90deg, var(--coral), var(--orange), var(--amber), var(--rose), var(--red), var(--coral));
+    background-size: 300% 100%;
+    animation: stripe 4s linear infinite;
+  }
+  @keyframes stripe { 0%{background-position:0% 50%} 100%{background-position:300% 50%} }
+
+  /* Multiply overlay */
+  .multiply-overlay {
+    position: fixed; inset: 0; z-index: 0; opacity: .018; pointer-events: none;
+    background-image:
+      radial-gradient(circle, rgba(249,112,102,.7) 1px, transparent 1px),
+      radial-gradient(circle, rgba(251,146,60,.5) 1px, transparent 1px);
+    background-size: 48px 48px, 24px 24px;
+    background-position: 0 0, 12px 12px;
+  }
+
+  /* Particles canvas */
+  #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  section, header, footer { position: relative; z-index: 1; }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255,255,255,.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+  }
+  .glass-strong {
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 20px;
+  }
+
+  /* Neon glow */
+  .neon-coral  { color: var(--coral);  text-shadow: 0 0 20px rgba(249,112,102,.65), 0 0 40px rgba(249,112,102,.3); }
+  .neon-orange { color: var(--orange); text-shadow: 0 0 20px rgba(251,146,60,.65),  0 0 40px rgba(251,146,60,.3); }
+  .neon-amber  { color: var(--amber);  text-shadow: 0 0 20px rgba(251,191,36,.65); }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* Avatar ring */
+  .avatar-ring {
+    width: 120px; height: 120px; border-radius: 50%; padding: 3px;
+    background: conic-gradient(var(--coral), var(--orange), var(--amber), var(--rose), var(--red), var(--coral));
+    animation: spin 6s linear infinite;
+    margin: 0 auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Letter cards */
+  .letter-card {
+    width: 52px; height: 64px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem; font-weight: 900;
+    border-radius: 12px;
+    border: 2px solid rgba(249,112,102,.35);
+    background: rgba(249,112,102,.08);
+    color: var(--coral);
+    text-shadow: 0 0 14px rgba(249,112,102,.9);
+    animation: lPulse 3s ease-in-out infinite;
+  }
+  .letter-card:nth-child(2) { animation-delay:.35s; border-color:rgba(251,146,60,.35); background:rgba(251,146,60,.08); color:var(--orange); text-shadow:0 0 14px rgba(251,146,60,.9); }
+  .letter-card:nth-child(3) { animation-delay:.7s;  border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.08); color:var(--amber); text-shadow:0 0 14px rgba(251,191,36,.9); }
+  @keyframes lPulse { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* Multiple meter */
+  .multi-meter { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+  .multi-seg {
+    width: 18px; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,.09); transition: background .3s;
+  }
+  .multi-seg.lit { background: var(--coral);  box-shadow: 0 0 6px rgba(249,112,102,.7); }
+  .multi-seg.lit:nth-child(3n+2) { background: var(--orange); box-shadow: 0 0 6px rgba(251,146,60,.7); }
+  .multi-seg.lit:nth-child(3n)   { background: var(--amber);  box-shadow: 0 0 6px rgba(251,191,36,.7); }
+
+  /* KPI */
+  .kpi-card {
+    text-align: center; padding: 28px 20px; border-radius: 16px;
+    border: 1px solid rgba(249,112,102,.2);
+    background: linear-gradient(135deg, rgba(249,112,102,.07), rgba(251,146,60,.04));
+  }
+
+  /* Social */
+  .social-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 20px; border-radius: 14px;
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    color: #e2e8f0; text-decoration: none; font-weight: 500;
+    transition: all .25s ease;
+  }
+  .social-btn:hover { background: rgba(249,112,102,.12); border-color: rgba(249,112,102,.4); transform: translateX(6px); color: var(--coral); }
+  .social-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Word pills */
+  .word-pill {
+    padding: 8px 18px; border-radius: 999px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+    border: 1px solid rgba(249,112,102,.28); background: rgba(249,112,102,.07); color: var(--coral);
+    transition: all .2s; cursor: default;
+  }
+  .word-pill:hover { background: rgba(249,112,102,.2); transform: scale(1.06); box-shadow: 0 0 14px rgba(249,112,102,.35); }
+  .word-pill.b { border-color:rgba(251,146,60,.28); background:rgba(251,146,60,.07); color:var(--orange); }
+  .word-pill.b:hover { background:rgba(251,146,60,.2); box-shadow:0 0 14px rgba(251,146,60,.35); }
+  .word-pill.c { border-color:rgba(251,191,36,.28); background:rgba(251,191,36,.07); color:var(--amber); }
+  .word-pill.c:hover { background:rgba(251,191,36,.2); box-shadow:0 0 14px rgba(251,191,36,.35); }
+
+  /* Progress bars */
+  .prog-track { height: 8px; background: rgba(255,255,255,.08); border-radius: 999px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 999px; width: 0; transition: width 1.4s cubic-bezier(.4,0,.2,1); }
+
+  /* Accordion */
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .acc-body.open { max-height: 340px; }
+  .acc-arrow { transition: transform .3s ease; display: inline-block; }
+  .acc-arrow.open { transform: rotate(180deg); }
+
+  /* Carousel */
+  .carousel-track { display: flex; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+  .carousel-slide { min-width: 100%; position: relative; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); transition: all .3s; cursor: pointer; border: none; }
+  .carousel-dot.active { background: var(--coral); width: 24px; border-radius: 4px; box-shadow: 0 0 8px rgba(249,112,102,.6); }
+
+  /* Music player */
+  .vinyl {
+    width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+    background: conic-gradient(#1a0c0a 0deg 30deg,#2d1510 30deg 60deg,#1a0c0a 60deg 90deg,#2d1510 90deg 120deg,#1a0c0a 120deg 150deg,#2d1510 150deg 180deg,#1a0c0a 180deg 210deg,#2d1510 210deg 240deg,#1a0c0a 240deg 270deg,#2d1510 270deg 300deg,#1a0c0a 300deg 330deg,#2d1510 330deg 360deg);
+    position: relative; border: 3px solid rgba(249,112,102,.38);
+  }
+  .vinyl::after { content:''; position:absolute; inset:30%; border-radius:50%; background:var(--coral); box-shadow:0 0 12px rgba(249,112,102,.9); }
+  .vinyl.spinning { animation: vinylSpin 2s linear infinite; }
+  @keyframes vinylSpin { to { transform: rotate(360deg); } }
+  .music-prog-track { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; cursor: pointer; }
+  .music-prog-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--coral), var(--orange)); transition: width .2s linear; }
+
+  /* Code block */
+  .code-block {
+    background: #110a08; border: 1px solid rgba(249,112,102,.18);
+    border-radius: 12px; overflow-x: auto; padding: 20px;
+    font-family: 'Fira Code','Consolas',monospace; font-size: .8rem; line-height: 1.75;
+  }
+  .tk-kw { color: #ff7b72; } .tk-fn { color: #ffa657; } .tk-st { color: #a5d6ff; }
+  .tk-nm { color: #7ee787; } .tk-cm { color: #8b949e; }
+
+  /* Timeline */
+  .tl-line { width: 2px; background: linear-gradient(180deg, var(--coral), var(--orange), var(--amber), var(--rose), var(--red)); border-radius: 2px; }
+  .tl-dot  { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--coral); background: var(--bg); box-shadow: 0 0 8px rgba(249,112,102,.6); flex-shrink: 0; }
+
+  /* Announcement */
+  .announce-bar {
+    background: linear-gradient(90deg, rgba(249,112,102,.1), rgba(251,146,60,.1), rgba(251,191,36,.08));
+    border: 1px solid rgba(249,112,102,.22); border-radius: 14px;
+    padding: 16px 24px; display: flex; align-items: center; gap: 14px;
+  }
+  .announce-badge { padding: 4px 12px; border-radius: 999px; font-size: .7rem; font-weight: 700; background: var(--coral); color: #fff; letter-spacing: .08em; white-space: nowrap; flex-shrink: 0; }
+
+  /* Multiply cards */
+  .multi-card {
+    padding: 18px; border-radius: 14px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    text-align: center; transition: all .25s;
+  }
+  .multi-card:hover { background: rgba(249,112,102,.07); border-color: rgba(249,112,102,.28); transform: translateY(-3px); }
+
+  /* Project cards */
+  .project-card { padding: 22px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); transition: all .25s; }
+  .project-card:hover { background: rgba(249,112,102,.07); border-color: rgba(249,112,102,.3); transform: translateY(-4px); }
+  .status-badge { padding: 2px 10px; border-radius: 999px; font-size: .65rem; font-weight: 700; letter-spacing: .08em; }
+
+  /* Form inputs */
+  .form-input {
+    width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; padding: 12px 16px; color: #e2e8f0; font-size: .9rem;
+    transition: border-color .2s, box-shadow .2s; outline: none;
+  }
+  .form-input:focus { border-color: rgba(249,112,102,.5); box-shadow: 0 0 0 3px rgba(249,112,102,.1); }
+  .form-input::placeholder { color: rgba(255,255,255,.22); }
+
+  /* Transform row */
+  .transform-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 12px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    transition: all .2s;
+  }
+  .transform-row:hover { background: rgba(249,112,102,.07); border-color: rgba(249,112,102,.25); }
+
+  /* Scroll top */
+  #scrollTop {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--coral), var(--orange));
+    border: none; cursor: pointer; display: none; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: #fff; box-shadow: 0 4px 16px rgba(249,112,102,.45);
+    transition: transform .2s;
+  }
+  #scrollTop:hover { transform: scale(1.1) translateY(-2px); }
+
+  @media (max-width:640px) {
+    .letter-card { width: 44px; height: 56px; font-size: 1.6rem; }
+    .kpi-card { padding: 20px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+<div class="multiply-overlay"></div>
+<canvas id="particles"></canvas>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ═══════════════════════════════════════════
+  1. HERO
+═══════════════════════════════════════════ -->
+<header class="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
+  <div class="max-w-2xl mx-auto w-full">
+
+    <!-- Avatar -->
+    <div class="avatar-ring mb-6">
+      <div class="avatar-inner">
+        <img src="https://api.dicebear.com/9.x/shapes/svg?seed=ple&backgroundColor=f97066,fb923c,fbbf24&backgroundType=gradientLinear"
+             alt="ple.kr avatar" style="width:100%;height:100%;border-radius:50%;"/>
+      </div>
+    </div>
+
+    <!-- Label -->
+    <p style="font-family:'Nunito',sans-serif;font-size:clamp(.7rem,2.4vw,1rem);color:rgba(255,255,255,.42);letter-spacing:.3em;text-transform:uppercase;margin-bottom:8px;">English Suffix</p>
+
+    <!-- Title -->
+    <h1 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:clamp(4rem,13vw,7.5rem);font-weight:900;line-height:1;margin-bottom:4px;">‑ple</h1>
+    <p style="font-size:clamp(.9rem,2.5vw,1.2rem);color:rgba(255,255,255,.48);letter-spacing:.12em;margin-bottom:28px;">ple.kr</p>
+
+    <!-- Core meaning -->
+    <div class="glass-strong p-5 mb-8 text-left" style="border-color:rgba(249,112,102,.22);">
+      <p style="font-size:.68rem;color:var(--coral);letter-spacing:.22em;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Core Meaning</p>
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 6px rgba(249,112,102,.9);flex-shrink:0;display:block;"></span>
+          <span style="font-size:.9rem;">배수·복수·반복을 나타내는 접미사</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 6px rgba(251,146,60,.9);flex-shrink:0;display:block;"></span>
+          <span style="font-size:.9rem;">"~배의 / ~겹의 / ~종류로 이루어진"</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 6px rgba(251,191,36,.9);flex-shrink:0;display:block;"></span>
+          <span style="font-size:.9rem;">라틴어 ‑plus / ‑plex → 프랑스어 ‑ple → 영어 ‑ple</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter cards -->
+    <div class="flex justify-center gap-3 mb-8">
+      <div class="letter-card">p</div>
+      <div class="letter-card">l</div>
+      <div class="letter-card">e</div>
+    </div>
+
+    <!-- Multiple meter -->
+    <p style="font-size:.68rem;color:rgba(255,255,255,.32);letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px;">Multiply Level</p>
+    <div class="multi-meter mb-2" id="multiMeter"></div>
+    <p style="font-size:.75rem;color:rgba(255,255,255,.28);">17 / 20</p>
+
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+  2. KPI BOARD
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:32px;">‑ple by the Numbers</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;">
+      <div class="kpi-card">
+        <p class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:2.4rem;font-weight:900;" id="kpi1">0</p>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.42);margin-top:6px;">‑ple 파생 어휘 수</p>
+      </div>
+      <div class="kpi-card" style="border-color:rgba(251,146,60,.2);background:linear-gradient(135deg,rgba(251,146,60,.07),rgba(251,191,36,.04));">
+        <p class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:2.4rem;font-weight:900;" id="kpi2">0</p>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.42);margin-top:6px;">년 라틴어 역사</p>
+      </div>
+      <div class="kpi-card" style="border-color:rgba(251,191,36,.2);background:linear-gradient(135deg,rgba(251,191,36,.07),rgba(254,243,199,.04));">
+        <p class="neon-amber" style="font-family:'Nunito',sans-serif;font-size:2.4rem;font-weight:900;">∞</p>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.42);margin-top:6px;">배수의 힘 (Multiply Power)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  3. ANNOUNCEMENT
+═══════════════════════════════════════════ -->
+<section class="py-8 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <div class="announce-bar">
+      <span class="announce-badge">NEW</span>
+      <p style="font-size:.88rem;color:rgba(255,255,255,.82);">
+        🔢 <strong>Season 13 ON AIR</strong> — ‑ple 핵심 어휘 100선 + simple / multiple / triple 완전 정복!
+        <a href="https://ple.kr" style="color:var(--coral);text-decoration:underline;margin-left:6px;">ple.kr 바로가기 →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  4. SOCIAL LINKS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-lg mx-auto">
+    <h2 class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Follow ple.kr</h2>
+    <div class="flex flex-col gap-3">
+      <a href="https://instagram.com/ple.kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">📷</div>
+        <div><p style="font-size:.85rem;font-weight:600;">Instagram</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">@ple.kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="https://youtube.com/@ple.kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#ff0000;">▶</div>
+        <div><p style="font-size:.85rem;font-weight:600;">YouTube</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">@ple.kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="https://x.com/ple_kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#000;border:1px solid rgba(255,255,255,.15);">✕</div>
+        <div><p style="font-size:.85rem;font-weight:600;">X / Twitter</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">@ple_kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="https://github.com/ple-kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#24292f;">🐙</div>
+        <div><p style="font-size:.85rem;font-weight:600;">GitHub</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">ple-kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="mailto:hello@ple.kr" class="social-btn">
+        <div class="social-icon" style="background:linear-gradient(135deg,var(--coral),var(--orange));">✉</div>
+        <div><p style="font-size:.85rem;font-weight:600;">Email</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">hello@ple.kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  5. WORD EXAMPLES
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:8px;">‑ple Words in Action</h2>
+    <p style="font-size:.83rem;color:rgba(255,255,255,.35);margin-bottom:28px;">‑ple 파생 핵심 어휘 12선</p>
+    <div class="flex flex-wrap gap-3 justify-center">
+      <span class="word-pill">simple</span>
+      <span class="word-pill b">multiple</span>
+      <span class="word-pill c">triple</span>
+      <span class="word-pill">people</span>
+      <span class="word-pill b">example</span>
+      <span class="word-pill c">temple</span>
+      <span class="word-pill">couple</span>
+      <span class="word-pill b">principle</span>
+      <span class="word-pill c">purple</span>
+      <span class="word-pill">apple</span>
+      <span class="word-pill b">ample</span>
+      <span class="word-pill c">sample</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  6. MULTIPLY SHOWCASE
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:8px;">‑ple Multiply Chart</h2>
+    <p style="font-size:.83rem;color:rgba(255,255,255,.35);text-align:center;margin-bottom:28px;">숫자 + ‑ple = 배수 표현의 완성</p>
+    <div class="flex flex-col gap-3">
+      <div class="transform-row">
+        <span style="color:var(--coral);font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;min-width:50px;">1×</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">sim- (one, same)</span>
+        <span style="color:var(--amber);font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;">simple</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">단순한·하나의</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--coral);font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;min-width:50px;">2×</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">du- (two)</span>
+        <span style="color:var(--amber);font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;">double</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">두 배의</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--coral);font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;min-width:50px;">3×</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">tri- (three)</span>
+        <span style="color:var(--amber);font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;">triple</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">세 배의</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--coral);font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;min-width:50px;">4×</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">quadru- (four)</span>
+        <span style="color:var(--amber);font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;">quadruple</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">네 배의</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--coral);font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;min-width:50px;">n×</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">multi- (many)</span>
+        <span style="color:var(--amber);font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;">multiple</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">다수의·배수의</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  7. LINGUISTIC TRAITS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-amber" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:28px;">Linguistic Traits</h2>
+    <div class="glass p-6 flex flex-col gap-6">
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">배수·복수 형성력 (Multiply Formation)</span>
+          <span style="font-size:.85rem;color:var(--coral);">96%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="96%" style="background:linear-gradient(90deg,var(--coral),var(--orange));"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">일상·수학적 사용 빈도 (Usage)</span>
+          <span style="font-size:.85rem;color:var(--orange);">97%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="97%" style="background:linear-gradient(90deg,var(--orange),var(--amber));"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">어휘 다양성 (Word Diversity)</span>
+          <span style="font-size:.85rem;color:var(--amber);">94%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="94%" style="background:linear-gradient(90deg,var(--amber),var(--rose));"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">역사적 지속성 (Historical Continuity)</span>
+          <span style="font-size:.85rem;color:var(--rose);">98%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="98%" style="background:linear-gradient(90deg,var(--rose),var(--coral));"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  8. SUFFIX ROLES
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:28px;">Suffix Roles</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="glass p-5 text-center" style="border-color:rgba(249,112,102,.22);">
+        <div style="font-size:2rem;margin-bottom:8px;">✖️</div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--coral);margin-bottom:4px;">배수 표현</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">triple, quadruple, multiple</p>
+      </div>
+      <div class="glass p-5 text-center" style="border-color:rgba(251,146,60,.22);">
+        <div style="font-size:2rem;margin-bottom:8px;">🧩</div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--orange);margin-bottom:4px;">단순·기본 형용사</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">simple, ample, supple</p>
+      </div>
+      <div class="glass p-5 text-center" style="border-color:rgba(251,191,36,.22);">
+        <div style="font-size:2rem;margin-bottom:8px;">👥</div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);margin-bottom:4px;">집합·복수 명사</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">people, couple, example</p>
+      </div>
+      <div class="glass p-5 text-center" style="border-color:rgba(251,113,133,.22);">
+        <div style="font-size:2rem;margin-bottom:8px;">🏛️</div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--rose);margin-bottom:4px;">장소·구조 명사</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">temple,ample, principle</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  9. CODE BLOCK
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Suffix Anatomy</h2>
+    <div class="code-block">
+<span class="tk-kw">const</span> <span class="tk-fn">suffix</span> = {<br>
+&nbsp;&nbsp;<span class="tk-nm">symbol</span>:      <span class="tk-st">"‑ple"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">siblings</span>:    [<span class="tk-st">"‑ple"</span>, <span class="tk-st">"‑ble"</span>, <span class="tk-st">"‑plex"</span>, <span class="tk-st">"‑plus"</span>],<br>
+&nbsp;&nbsp;<span class="tk-nm">origin</span>:      <span class="tk-st">"Latin ‑plus / ‑plex → Old French ‑ple"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">meaning</span>:     [<span class="tk-st">"fold"</span>, <span class="tk-st">"times"</span>, <span class="tk-st">"multiplied by"</span>],<br>
+&nbsp;&nbsp;<span class="tk-nm">pos</span>:         <span class="tk-st">"adjective / noun / numeral-forming"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">series</span>:      { <span class="tk-nm">1</span>:<span class="tk-st">"simple"</span>, <span class="tk-nm">2</span>:<span class="tk-st">"double"</span>, <span class="tk-nm">3</span>:<span class="tk-st">"triple"</span>, <span class="tk-nm">4</span>:<span class="tk-st">"quadruple"</span>, <span class="tk-nm">n</span>:<span class="tk-st">"multiple"</span> },<br>
+&nbsp;&nbsp;<span class="tk-nm">verbForm</span>:    <span class="tk-st">"‑ply (multiply, apply, supply)"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">words</span>:       <span class="tk-nm">1500</span>,<br>
+&nbsp;&nbsp;<span class="tk-fn">form</span>:        <span class="tk-kw">num</span> =&gt; <span class="tk-kw">num</span> + <span class="tk-st">"ple"</span>,<br>
+};<br>
+<span class="tk-cm">// tri + ple = triple (세 겹의)</span><br>
+<span class="tk-cm">// multi + ple = multiple (여러 겹의)</span><br>
+<span class="tk-cm">// sim(i) + ple = simple (단일한)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  10. ETYMOLOGY TIMELINE
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-amber" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:32px;">Etymology Timeline</h2>
+    <div class="flex gap-6">
+      <div class="flex flex-col items-center" style="padding-top:8px;">
+        <div class="tl-dot"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--orange);box-shadow:0 0 8px rgba(251,146,60,.6);"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--amber);box-shadow:0 0 8px rgba(251,191,36,.6);"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--rose);box-shadow:0 0 8px rgba(251,113,133,.6);"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--red);box-shadow:0 0 8px rgba(239,68,68,.6);"></div>
+      </div>
+      <div class="flex flex-col gap-8 flex-1">
+        <div class="glass p-4" style="border-color:rgba(249,112,102,.22);">
+          <p style="font-size:.68rem;color:var(--coral);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Proto-Indo-European</p>
+          <p style="font-size:.9rem;font-weight:600;">*pel- / *plō-</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">"접다(fold), 채우다(fill)"의 의미를 지닌 원시 어근</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(251,146,60,.22);">
+          <p style="font-size:.68rem;color:var(--orange);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Classical Latin (~200 BC)</p>
+          <p style="font-size:.9rem;font-weight:600;">‑plus / ‑plex</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">simplex(단순한), duplex(이중의), triplex(세 겹의) 형성</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(251,191,36,.22);">
+          <p style="font-size:.68rem;color:var(--amber);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Old French (~9–13c)</p>
+          <p style="font-size:.9rem;font-weight:600;">‑ple</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">라틴어 ‑plex가 프랑스어 음운 변화로 ‑ple로 단순화</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(251,113,133,.22);">
+          <p style="font-size:.68rem;color:var(--rose);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Middle English (~13–15c)</p>
+          <p style="font-size:.9rem;font-weight:600;">‑ple 정착</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">simple, triple, people 등 핵심 어휘 영어에 편입</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(239,68,68,.22);">
+          <p style="font-size:.68rem;color:var(--red);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Modern English (17c ~ present)</p>
+          <p style="font-size:.9rem;font-weight:600;">수학·과학 어휘 확장</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">multiple, quadruple, quintuple… 과학·통계 분야로 확장</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  11. QUOTES
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto flex flex-col gap-6">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:8px;">Lexical Wisdom</h2>
+    <div class="glass p-6" style="border-left:3px solid var(--coral);">
+      <p style="font-size:1rem;font-style:italic;color:rgba(255,255,255,.82);line-height:1.75;">"Keep it simple. The suffix ‑ple teaches us that the most powerful concepts — from simple to multiple — fold back to one root."</p>
+      <p style="font-size:.8rem;color:var(--coral);margin-top:12px;font-weight:600;">— ple.kr</p>
+    </div>
+    <div class="glass p-6" style="border-left:3px solid var(--orange);">
+      <p style="font-size:1rem;font-style:italic;color:rgba(255,255,255,.82);line-height:1.75;">"Triple the effort, multiple the result. ‑ple doesn't just count — it multiplies meaning itself."</p>
+      <p style="font-size:.8rem;color:var(--orange);margin-top:12px;font-weight:600;">— ple.kr 어원 노트</p>
+    </div>
+    <div class="glass p-6" style="border-left:3px solid var(--amber);">
+      <p style="font-size:1rem;font-style:italic;color:rgba(255,255,255,.82);line-height:1.75;">"‑ple은 단순히 숫자를 세는 것이 아니다. simplex에서 시작해 multiple에 이르는 2,000년의 배수 언어다."</p>
+      <p style="font-size:.8rem;color:var(--amber);margin-top:12px;font-weight:600;">— ple.kr 철학</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  12. FEATURED VIDEO
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Featured Video</h2>
+    <div class="glass overflow-hidden" style="border-color:rgba(249,112,102,.22);">
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="‑ple suffix lecture"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="p-4 flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <p style="font-size:.9rem;font-weight:600;">‑ple 접미사 완전 정복 | ple.kr</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:2px;">simple, triple, multiple… simple에서 quadruple까지</p>
+        </div>
+        <div class="text-right">
+          <p style="font-size:.8rem;color:var(--coral);">52.6K views</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.32);">8.7K likes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  13. PLAYLIST
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-amber" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Playlist</h2>
+    <div class="flex flex-col gap-4">
+      <a href="https://youtube.com/@ple.kr" target="_blank" rel="noopener" class="glass flex gap-4 p-4 items-center" style="text-decoration:none;border-color:rgba(249,112,102,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(249,112,102,.42)'" onmouseout="this.style.borderColor='rgba(249,112,102,.15)'">
+        <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=120&h=68&fit=crop" alt="ep1" style="border-radius:8px;flex-shrink:0;width:120px;height:68px;object-fit:cover;"/>
+        <div style="flex:1;">
+          <p style="font-size:.78rem;color:var(--coral);font-weight:700;margin-bottom:2px;">Ep.01</p>
+          <p style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88);">simple → triple → multiple: ‑ple 배수 완전 정리</p>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;">24:33 · 36.8K views</p>
+        </div>
+        <span style="color:rgba(255,255,255,.25);font-size:1.2rem;">▶</span>
+      </a>
+      <a href="https://youtube.com/@ple.kr" target="_blank" rel="noopener" class="glass flex gap-4 p-4 items-center" style="text-decoration:none;border-color:rgba(251,146,60,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(251,146,60,.42)'" onmouseout="this.style.borderColor='rgba(251,146,60,.15)'">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=120&h=68&fit=crop" alt="ep2" style="border-radius:8px;flex-shrink:0;width:120px;height:68px;object-fit:cover;"/>
+        <div style="flex:1;">
+          <p style="font-size:.78rem;color:var(--orange);font-weight:700;margin-bottom:2px;">Ep.02</p>
+          <p style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88);">simplex → simple: 라틴어 ‑plex에서 영어 ‑ple까지</p>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;">21:17 · 29.4K views</p>
+        </div>
+        <span style="color:rgba(255,255,255,.25);font-size:1.2rem;">▶</span>
+      </a>
+      <a href="https://youtube.com/@ple.kr" target="_blank" rel="noopener" class="glass flex gap-4 p-4 items-center" style="text-decoration:none;border-color:rgba(251,191,36,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(251,191,36,.42)'" onmouseout="this.style.borderColor='rgba(251,191,36,.15)'">
+        <img src="https://images.unsplash.com/photo-1546074177-ffdda98d214f?w=120&h=68&fit=crop" alt="ep3" style="border-radius:8px;flex-shrink:0;width:120px;height:68px;object-fit:cover;"/>
+        <div style="flex:1;">
+          <p style="font-size:.78rem;color:var(--amber);font-weight:700;margin-bottom:2px;">Ep.03</p>
+          <p style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88);">people, example, principle — ‑ple 일상 어휘 심층 분석</p>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;">18:52 · 24.1K views</p>
+        </div>
+        <span style="color:rgba(255,255,255,.25);font-size:1.2rem;">▶</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  14. IMAGE CAROUSEL
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Gallery</h2>
+    <div class="glass overflow-hidden" style="border-color:rgba(249,112,102,.22);">
+      <div style="position:relative;overflow:hidden;border-radius:16px;">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=640&h=280&fit=crop" alt="s1" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--coral);">Simple Beauty</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">단순함의 아름다운 어원</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=640&h=280&fit=crop" alt="s2" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--orange);">Triple Power</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">세 겹의 어휘 에너지</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=640&h=280&fit=crop" alt="s3" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--amber);">Multiple Worlds</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">다수의 의미를 담은 접미사</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=640&h=280&fit=crop" alt="s4" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--rose);">People & Principle</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">일상 속 ‑ple 어휘</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=640&h=280&fit=crop" alt="s5" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--red);">Example & Temple</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">구조와 실례의 언어</p>
+            </div>
+          </div>
+        </div>
+        <button onclick="carouselMove(-1)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;">‹</button>
+        <button onclick="carouselMove(1)"  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;">›</button>
+      </div>
+      <div class="flex justify-center gap-2 p-4" id="carouselDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  15. SPOTLIGHT
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <div style="position:relative;border-radius:20px;overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=640&h=240&fit=crop" alt="spotlight" style="width:100%;height:200px;object-fit:cover;"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(249,112,102,.65),rgba(251,146,60,.48));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;">
+        <p style="font-family:'Nunito',sans-serif;font-size:clamp(1rem,3.8vw,1.7rem);font-weight:900;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);">Simple. Triple. Multiple.</p>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.82);margin-top:8px;">‑ple 하나로 완성되는 배수의 언어</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  16. MUSIC PLAYER
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">ple.kr Soundtrack</h2>
+    <div class="glass p-6" style="border-color:rgba(249,112,102,.22);">
+      <div class="flex items-center gap-5 mb-5">
+        <div class="vinyl" id="vinyl"></div>
+        <div style="flex:1;">
+          <p style="font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;color:var(--coral);" id="trackTitle">Simple & True</p>
+          <p style="font-size:.78rem;color:rgba(255,255,255,.35);" id="trackArtist">ple.kr Beats</p>
+          <div style="margin-top:10px;">
+            <div class="flex justify-between mb-1" style="font-size:.73rem;color:rgba(255,255,255,.25);">
+              <span id="timeNow">0:00</span><span id="timeTot">3:44</span>
+            </div>
+            <div class="music-prog-track" id="musicTrack" onclick="seekMusic(event)">
+              <div class="music-prog-fill" id="musicFill" style="width:0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-6 mb-6">
+        <button onclick="musicPrev()" style="background:none;border:none;color:rgba(255,255,255,.42);font-size:1.4rem;cursor:pointer;" title="prev">⏮</button>
+        <button onclick="musicToggle()" id="playBtn" style="background:linear-gradient(135deg,var(--coral),var(--orange));border:none;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.1rem;color:#fff;display:flex;align-items:center;justify-content:center;">▶</button>
+        <button onclick="musicNext()" style="background:none;border:none;color:rgba(255,255,255,.42);font-size:1.4rem;cursor:pointer;" title="next">⏭</button>
+      </div>
+      <div class="flex flex-col gap-2" id="trackList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  17. PROJECTS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:28px;">Projects</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">📖</span>
+          <span class="status-badge" style="background:rgba(249,112,102,.15);color:var(--coral);border:1px solid rgba(249,112,102,.3);">LIVE</span>
+        </div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--coral);margin-bottom:4px;">‑ple Dictionary</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">1,500+ ‑ple 어휘 데이터베이스</p>
+      </div>
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">✖️</span>
+          <span class="status-badge" style="background:rgba(251,146,60,.15);color:var(--orange);border:1px solid rgba(251,146,60,.3);">BETA</span>
+        </div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--orange);margin-bottom:4px;">Multiply Lab</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">배수·복수 어원 분석 도구</p>
+      </div>
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">🎮</span>
+          <span class="status-badge" style="background:rgba(251,191,36,.15);color:var(--amber);border:1px solid rgba(251,191,36,.3);">DEV</span>
+        </div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);margin-bottom:4px;">‑ple Quest</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">게임형 배수 어원 학습 앱</p>
+      </div>
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">🤖</span>
+          <span class="status-badge" style="background:rgba(251,113,133,.15);color:var(--rose);border:1px solid rgba(251,113,133,.3);">SOON</span>
+        </div>
+        <p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--rose);margin-bottom:4px;">‑ple AI Tutor</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">AI 기반 개인화 어원 튜터</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  18. RECENT POSTS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-amber" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Recent Posts</h2>
+    <div class="flex flex-col gap-4">
+      <div class="glass p-5" style="border-color:rgba(249,112,102,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(249,112,102,.42)'" onmouseout="this.style.borderColor='rgba(249,112,102,.15)'">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span style="font-size:.68rem;color:var(--coral);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Multiply Series</span>
+            <p style="font-weight:600;margin-top:4px;font-size:.93rem;">single부터 decuple까지: ‑ple 배수 계열 완전 정리</p>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:4px;">1배~10배 영어 표현과 ‑ple 어원 완전 해부</p>
+          </div>
+          <span style="font-size:.73rem;color:rgba(255,255,255,.25);white-space:nowrap;flex-shrink:0;">2025.12.28</span>
+        </div>
+      </div>
+      <div class="glass p-5" style="border-color:rgba(251,146,60,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(251,146,60,.42)'" onmouseout="this.style.borderColor='rgba(251,146,60,.15)'">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span style="font-size:.68rem;color:var(--orange);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Etymology</span>
+            <p style="font-weight:600;margin-top:4px;font-size:.93rem;">simplex에서 simple까지: 라틴어 ‑plex 어원 심층 탐구</p>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:4px;">complex, duplex, multiplex → ‑ple 변환 과정 완전 정리</p>
+          </div>
+          <span style="font-size:.73rem;color:rgba(255,255,255,.25);white-space:nowrap;flex-shrink:0;">2025.12.14</span>
+        </div>
+      </div>
+      <div class="glass p-5" style="border-color:rgba(251,191,36,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(251,191,36,.42)'" onmouseout="this.style.borderColor='rgba(251,191,36,.15)'">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span style="font-size:.68rem;color:var(--amber);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Daily Words</span>
+            <p style="font-weight:600;margin-top:4px;font-size:.93rem;">people, example, principle: 일상 속 숨은 ‑ple 어휘</p>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:4px;">우리가 매일 쓰는 ‑ple 단어의 숨겨진 어원 이야기</p>
+          </div>
+          <span style="font-size:.73rem;color:rgba(255,255,255,.25);white-space:nowrap;flex-shrink:0;">2025.12.01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  19. FAQ
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">FAQ</h2>
+    <div class="flex flex-col gap-3">
+      <div class="glass overflow-hidden" style="border-color:rgba(249,112,102,.15);">
+        <button onclick="toggleAcc('acc1','arr1')" class="w-full flex items-center justify-between p-5 text-left" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.88);">
+          <span style="font-size:.88rem;font-weight:600;">‑ple 접미사는 무엇인가요?</span>
+          <span class="acc-arrow" id="arr1" style="font-size:1rem;color:var(--coral);">▼</span>
+        </button>
+        <div class="acc-body" id="acc1" style="padding:0 20px;">
+          <p style="font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;padding-bottom:16px;">‑ple은 라틴어 ‑plus / ‑plex에서 유래한 접미사로, 숫자나 어근에 붙어 "~배의, ~겹의, ~종류로 이루어진" 의미를 나타냅니다. triple(3배), multiple(다수의), simple(단일한) 등 수량·복수 개념을 표현하며, 수학·과학·일상 어휘에 걸쳐 약 1,500개 이상의 단어를 형성합니다.</p>
+        </div>
+      </div>
+      <div class="glass overflow-hidden" style="border-color:rgba(251,146,60,.15);">
+        <button onclick="toggleAcc('acc2','arr2')" class="w-full flex items-center justify-between p-5 text-left" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.88);">
+          <span style="font-size:.88rem;font-weight:600;">‑ple과 ‑plex, ‑ply는 어떤 관계인가요?</span>
+          <span class="acc-arrow" id="arr2" style="font-size:1rem;color:var(--orange);">▼</span>
+        </button>
+        <div class="acc-body" id="acc2" style="padding:0 20px;">
+          <p style="font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;padding-bottom:16px;">세 형태 모두 라틴어 *plect- / *plex- 어근(접다, 겹치다)에서 유래한 형제 접미사입니다. ‑plex는 라틴어 직접 차용형(simplex, complex, duplex), ‑ple은 프랑스어를 통해 단순화된 형태(simple, triple, multiple), ‑ply는 동사형 파생(multiply, apply, supply, comply)으로 분화되었습니다.</p>
+        </div>
+      </div>
+      <div class="glass overflow-hidden" style="border-color:rgba(251,191,36,.15);">
+        <button onclick="toggleAcc('acc3','arr3')" class="w-full flex items-center justify-between p-5 text-left" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.88);">
+          <span style="font-size:.88rem;font-weight:600;">ple.kr 에서는 어떤 콘텐츠를 제공하나요?</span>
+          <span class="acc-arrow" id="arr3" style="font-size:1rem;color:var(--amber);">▼</span>
+        </button>
+        <div class="acc-body" id="acc3" style="padding:0 20px;">
+          <p style="font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;padding-bottom:16px;">ple.kr는 ‑ple 접미사의 어원 해설, 배수 계열 어휘 목록(1,500+), 유튜브 강의, ‑ple / ‑plex / ‑ply 관계 가이드, 인터랙티브 학습 도구를 제공합니다. simple에서 quadruple까지, ‑ple 계열 어휘의 라틴어 어원을 추적하고 현대 영어에서의 쓰임을 상세히 설명합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  20. NEWSLETTER
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-lg mx-auto text-center">
+    <h2 class="neon-orange" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:8px;">Newsletter</h2>
+    <p style="font-size:.83rem;color:rgba(255,255,255,.38);margin-bottom:24px;">매주 ‑ple 핵심 어휘 5선을 이메일로 받아보세요</p>
+    <div class="glass p-6" style="border-color:rgba(249,112,102,.22);">
+      <div class="flex gap-3 mb-3">
+        <input type="email" id="nlEmail" placeholder="your@email.com" class="form-input" style="flex:1;"/>
+        <button onclick="submitNewsletter()" style="padding:12px 20px;background:linear-gradient(135deg,var(--coral),var(--orange));border:none;border-radius:10px;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap;font-size:.83rem;">구독하기</button>
+      </div>
+      <p id="nlMsg" style="font-size:.78rem;min-height:20px;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  21. CONTACT + FOOTER
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-lg mx-auto">
+    <h2 class="neon-amber" style="font-family:'Nunito',sans-serif;font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:24px;">Contact</h2>
+    <div class="glass p-6" style="border-color:rgba(251,191,36,.2);">
+      <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">이름 *</label>
+            <input type="text" id="ctName" placeholder="홍길동" class="form-input"/>
+          </div>
+          <div>
+            <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">이메일 *</label>
+            <input type="email" id="ctEmail" placeholder="your@email.com" class="form-input"/>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">주제</label>
+          <input type="text" id="ctTopic" placeholder="‑ple 어원 문의, 협업 제안 등" class="form-input"/>
+        </div>
+        <div>
+          <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">메시지 *</label>
+          <textarea id="ctMsg" placeholder="궁금한 점이나 제안사항을 자유롭게 작성해 주세요." class="form-input" rows="4" style="resize:vertical;"></textarea>
+        </div>
+        <button onclick="submitContact()" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--coral));border:none;border-radius:10px;color:#fff;font-weight:700;cursor:pointer;font-size:.88rem;">메시지 보내기</button>
+        <p id="ctConfirm" style="font-size:.78rem;text-align:center;min-height:20px;"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 px-4 text-center" style="border-top:1px solid rgba(255,255,255,.06);">
+  <div class="max-w-2xl mx-auto">
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(249,112,102,.08);border:1px solid rgba(249,112,102,.18);color:var(--coral);">#suffix</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.18);color:var(--orange);">#‑ple</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.18);color:var(--amber);">#‑plex</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.18);color:var(--rose);">#영단어</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:var(--red);">#어원</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.48);">#Latin</span>
+    </div>
+    <h3 class="neon-coral" style="font-family:'Nunito',sans-serif;font-size:2rem;font-weight:900;margin-bottom:4px;">ple.kr</h3>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.35);margin-bottom:4px;">Simple · Triple · Multiple · Quadruple</p>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.2);margin-bottom:16px;">‑ple 접미사의 모든 것 — 배수, 어원, 곱셈의 언어</p>
+    <a href="https://ple.kr" style="color:var(--coral);text-decoration:none;font-size:.85rem;font-weight:600;" target="_blank" rel="noopener">https://ple.kr</a>
+    <p style="font-size:.73rem;color:rgba(255,255,255,.16);margin-top:16px;">© 2025 ple.kr. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ─── Particles ─── */
+(function(){
+  const cvs=document.getElementById('particles'),ctx=cvs.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=cvs.width=innerWidth;H=cvs.height=innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const cols=['rgba(249,112,102,','rgba(251,146,60,','rgba(251,191,36,','rgba(251,113,133,','rgba(239,68,68,'];
+  for(let i=0;i<68;i++) pts.push({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*.44, vy:(Math.random()-.5)*.44,
+    r:Math.random()*2+.5,
+    c:cols[Math.floor(Math.random()*cols.length)],
+    a:Math.random()*.42+.1
+  });
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c+p.a+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ─── Multiple meter (17/20) ─── */
+(function(){
+  const el=document.getElementById('multiMeter');
+  for(let i=0;i<20;i++){
+    const d=document.createElement('div');
+    d.className='multi-seg'+(i<17?' lit':'');
+    el.appendChild(d);
+  }
+})();
+
+/* ─── Count up ─── */
+function countUp(id,target,suffix,duration){
+  const el=document.getElementById(id);if(!el)return;
+  let start=0,step=target/60,interval=duration/60;
+  const t=setInterval(()=>{
+    start=Math.min(start+step,target);
+    el.textContent=Math.floor(start).toLocaleString()+suffix;
+    if(start>=target)clearInterval(t);
+  },interval);
+}
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ countUp('kpi1',1500,'+',1800); countUp('kpi2',2000,'년',1800); },400);
+});
+
+/* ─── Scroll reveal + progress bars ─── */
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.prog-fill').forEach(f=>{
+        setTimeout(()=>{ f.style.width=f.dataset.width; },200);
+      });
+    }
+  });
+},{threshold:.15});
+reveals.forEach(r=>io.observe(r));
+
+/* ─── Accordion ─── */
+function toggleAcc(id,arrowId){
+  const body=document.getElementById(id),arrow=document.getElementById(arrowId);
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.acc-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.acc-arrow').forEach(a=>a.classList.remove('open'));
+  if(!isOpen){body.classList.add('open');arrow.classList.add('open');}
+}
+
+/* ─── Carousel ─── */
+let carIdx=0;const carTotal=5;
+function carouselMove(dir){
+  carIdx=(carIdx+dir+carTotal)%carTotal;
+  document.getElementById('carouselTrack').style.transform=`translateX(-${carIdx*100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));
+}
+(function(){
+  const dc=document.getElementById('carouselDots');
+  for(let i=0;i<carTotal;i++){
+    const d=document.createElement('button');
+    d.className='carousel-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','slide '+(i+1));
+    d.onclick=()=>{
+      carIdx=i;
+      document.getElementById('carouselTrack').style.transform=`translateX(-${i*100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((dd,ii)=>dd.classList.toggle('active',ii===i));
+    };
+    dc.appendChild(d);
+  }
+  setInterval(()=>carouselMove(1),5200);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft')carouselMove(-1);
+    if(e.key==='ArrowRight')carouselMove(1);
+  });
+  let tsx=0;const tr=document.getElementById('carouselTrack');
+  tr.addEventListener('touchstart',e=>tsx=e.touches[0].clientX,{passive:true});
+  tr.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tsx;if(Math.abs(dx)>40)carouselMove(dx<0?1:-1);});
+})();
+
+/* ─── Music player ─── */
+const tracks=[
+  {title:'Simple & True',      artist:'ple.kr Beats',  dur:224},
+  {title:'Triple Sunrise',     artist:'ple.kr Studio', dur:258},
+  {title:'Multiple Dreams',    artist:'ple.kr Sound',  dur:241}
+];
+let mTrack=0,mTime=0,mPlaying=false,mTimer=null;
+function fmt(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;}
+function renderTrackList(){
+  const tl=document.getElementById('trackList');tl.innerHTML='';
+  tracks.forEach((t,i)=>{
+    const div=document.createElement('div');
+    div.style.cssText=`display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background .2s;background:${i===mTrack?'rgba(249,112,102,.09)':'transparent'};border:1px solid ${i===mTrack?'rgba(249,112,102,.28)':'transparent'};`;
+    div.innerHTML=`<span style="width:20px;text-align:center;font-size:.83rem;color:${i===mTrack?'var(--coral)':'rgba(255,255,255,.28)'};">${i===mTrack&&mPlaying?'♪':(i+1)}</span><div style="flex:1;"><p style="font-size:.83rem;font-weight:600;color:${i===mTrack?'var(--coral)':'rgba(255,255,255,.78)'};">${t.title}</p><p style="font-size:.73rem;color:rgba(255,255,255,.32);">${t.artist}</p></div><span style="font-size:.78rem;color:rgba(255,255,255,.28);">${fmt(t.dur)}</span>`;
+    div.onclick=()=>{mTrack=i;mTime=0;mPlaying=true;updateMusic();startMusicTimer();};
+    tl.appendChild(div);
+  });
+}
+function updateMusic(){
+  const t=tracks[mTrack];
+  document.getElementById('trackTitle').textContent=t.title;
+  document.getElementById('trackArtist').textContent=t.artist;
+  document.getElementById('timeTot').textContent=fmt(t.dur);
+  document.getElementById('timeNow').textContent=fmt(mTime);
+  document.getElementById('musicFill').style.width=(mTime/t.dur*100)+'%';
+  document.getElementById('playBtn').textContent=mPlaying?'⏸':'▶';
+  const vinyl=document.getElementById('vinyl');
+  mPlaying?vinyl.classList.add('spinning'):vinyl.classList.remove('spinning');
+  renderTrackList();
+}
+function startMusicTimer(){
+  clearInterval(mTimer);if(!mPlaying)return;
+  mTimer=setInterval(()=>{
+    mTime++;
+    if(mTime>=tracks[mTrack].dur){mTime=0;mTrack=(mTrack+1)%tracks.length;}
+    updateMusic();
+  },1000);
+}
+function musicToggle(){mPlaying=!mPlaying;updateMusic();startMusicTimer();}
+function musicPrev(){mTrack=(mTrack-1+tracks.length)%tracks.length;mTime=0;updateMusic();if(mPlaying)startMusicTimer();}
+function musicNext(){mTrack=(mTrack+1)%tracks.length;mTime=0;updateMusic();if(mPlaying)startMusicTimer();}
+function seekMusic(e){
+  const rect=e.currentTarget.getBoundingClientRect();
+  mTime=Math.floor((e.clientX-rect.left)/rect.width*tracks[mTrack].dur);
+  updateMusic();
+}
+updateMusic();
+
+/* ─── Newsletter ─── */
+function submitNewsletter(){
+  const email=document.getElementById('nlEmail').value.trim();
+  const msg=document.getElementById('nlMsg');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.style.color='#fb7185';msg.textContent='올바른 이메일 주소를 입력해 주세요.';return;
+  }
+  msg.style.color='#84cc16';
+  msg.textContent='✓ 구독 완료! 매주 ‑ple 핵심 어휘를 보내드릴게요.';
+  document.getElementById('nlEmail').value='';
+}
+
+/* ─── Contact ─── */
+function submitContact(){
+  const name=document.getElementById('ctName').value.trim();
+  const email=document.getElementById('ctEmail').value.trim();
+  const msg=document.getElementById('ctMsg').value.trim();
+  const conf=document.getElementById('ctConfirm');
+  if(!name||!email||!msg){conf.style.color='#fb7185';conf.textContent='이름, 이메일, 메시지를 모두 입력해 주세요.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){conf.style.color='#fb7185';conf.textContent='올바른 이메일 주소를 입력해 주세요.';return;}
+  conf.style.color='#84cc16';
+  conf.textContent='✓ 메시지가 전송되었습니다. 빠른 시일 내에 답변 드리겠습니다!';
+  ['ctName','ctEmail','ctTopic'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ctMsg').value='';
+}
+
+/* ─── Scroll to top ─── */
+const stb=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{ stb.style.display=scrollY>400?'flex':'none'; });
+</script>
+</body>
+</html>
